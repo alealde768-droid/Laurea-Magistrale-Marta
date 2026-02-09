@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Il mio biglietto personalizzato</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #1f2937, #111827);
+      color: #f9fafb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 18px;
+      padding: 32px 28px;
+      max-width: 420px;
+      width: 90%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      backdrop-filter: blur(10px);
+    }
+    .headline {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: #9ca3af;
+      margin-bottom: 20px;
+    }
+    .name {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .role {
+      font-size: 14px;
+      color: #a5b4fc;
+      margin-bottom: 16px;
+    }
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #4b5563, transparent);
+      margin: 16px 0;
+    }
+    .section-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+    .info-line {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .label {
+      color: #9ca3af;
+    }
+    a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .cta {
+      margin-top: 18px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #4f46e5;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      color: #e5e7eb;
+      text-decoration: none;
+    }
+    .cta:hover {
+      background: #4338ca;
+    }
+    .small-note {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 10px;
+    }
+    @media (max-width: 480px) {
+      .card {
+        padding: 24px 18px;
+      }
+      .headline {
+        font-size: 20px;
+      }
+      .name {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="headline">Piacere di conoscerti 👋</div>
+    <div class="subtitle">Questo è il mio biglietto digitale, sempre aggiornato e sempre disponibile.</div>
+
+    <div class="name">[Il tuo nome e cognome]</div>
+    <div class="role">[Ruolo principale es. Marketing strategist • Brand & Growth]</div>
+
+    <div class="divider"></div>
+
+    <div class="section-title">Contatti</div>
+    <div class="info-line"><span class="label">Email:</span> <a href="mailto:tuaemail@example.com">tuaemail@example.com</a></div>
+    <div class="info-line"><span class="label">Telefono:</span> +39 [tuo numero]</div>
+    <div class="info-line"><span class="label">Città:</span> Brescia, Lombardia (IT)</div>
+
+    <div class="divider"></div>
+
+    <div class="section-title">Online</div>
+    <div class="info-line"><span class="label">LinkedIn:</span> <a href="https://www.linkedin.com/in/tuo-profilo" target="_blank">linkedin.com/in/tuo-profilo</a></div>
+    <div class="info-line"><span class="label">Instagram:</span> <a href="https://www.instagram.com/tuo-username" target="_blank">@tuo-username</a></div>
+    <div class="info-line"><span class="label">TikTok:</span> <a href="https://www.tiktok.com/@tuo-username" target="_blank">@tuo-username</a></div>
+    
+    <div class="divider"></div>
+
+    <div class="section-title">Cosa faccio</div>
+    <div class="info-line">Aiuto brand e startup a crescere con strategia, contenuti e performance marketing.</div>
+    <div class="info-line">Specializzato in social, content strategy e sviluppo di progetti digitali.</div>
+
+    <a class="cta" href="mailto:tuaemail@example.com?subject=Contatto%20dal%20tuo%20biglietto%20digitale">
+      Scrivimi ora
+      <span>→</span>
+    </a>
+
+    <div class="small-note">
+      Salva questo link tra i preferiti o condividilo come biglietto digitale.
+    </div>
+  </div>
+</body>
+</html>
