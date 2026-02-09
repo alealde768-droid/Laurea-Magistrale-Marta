@@ -1,445 +1,189 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Auguri per la tua Laurea Magistrale 🎓</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    :root {
-      --bg: #0b1120;
-      --accent: #f97316;
-      --accent-soft: rgba(249, 115, 22, 0.15);
-      --text-main: #e5e7eb;
-      --text-muted: #9ca3af;
-      --card: #020617;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laurea Marta 🎓 </title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --primary: #e63946; --beach: #00b4d8; --sand: #f1faee; --dark: #1d3557; }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            background: var(--sand); 
+            color: var(--dark); 
+            overflow-x: hidden; 
+            overflow-y: auto; 
+        }
 
-    * {
-      box-sizing: border-box;
-    }
+        .screen { 
+            display: none; 
+            min-height: 100vh; 
+            width: 100%; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            padding: 40px 20px; 
+            box-sizing: border-box; 
+        }
 
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 24px 12px;
-    }
+        .active { 
+            display: flex; 
+            animation: fadeIn 0.8s ease-in-out; 
+        }
 
-    .page {
-      max-width: 960px;
-      width: 100%;
-      background: radial-gradient(circle at top left, rgba(249,115,22,0.12), transparent 55%),
-                  radial-gradient(circle at bottom right, rgba(59,130,246,0.12), transparent 55%),
-                  var(--card);
-      border-radius: 24px;
-      padding: 24px;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.6);
-      border: 1px solid rgba(148,163,184,0.35);
-      backdrop-filter: blur(10px);
-    }
+        img { 
+            max-width: 90%; 
+            max-height: 40vh; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+            margin-bottom: 20px; 
+            object-fit: cover;
+            display: block;
+        }
 
-    .header {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+        h1 { font-size: 1.6rem; margin: 10px; line-height: 1.2; }
+        p { font-size: 1.1rem; max-width: 320px; line-height: 1.4; margin-bottom: 15px; }
 
-    .grad-photo {
-      width: 160px;
-      height: 160px;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 2px solid rgba(249,115,22,0.7);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-      flex-shrink: 0;
-    }
+        button { 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 16px 32px; 
+            border-radius: 50px; 
+            font-size: 1rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            margin: 10px 0; 
+            width: 250px; 
+            flex-shrink: 0; 
+        }
 
-    .grad-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+        input { 
+            padding: 12px; 
+            border-radius: 10px; 
+            border: 2px solid #ddd; 
+            width: 80%; 
+            max-width: 250px; 
+            margin-bottom: 10px; 
+            font-size: 1rem; 
+        }
 
-    .header-text {
-      flex: 1;
-      min-width: 220px;
-    }
+        .quiz-btn { background: #457b9d; margin: 8px; }
+        #countdown { font-size: 1.5rem; font-weight: bold; color: var(--primary); margin-top: 10px; }
 
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.5);
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-    }
-
-    .chip-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 10px rgba(249,115,22,0.9);
-    }
-
-    .title {
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .subtitle {
-      font-size: 15px;
-      color: var(--text-muted);
-      max-width: 480px;
-      line-height: 1.5;
-    }
-
-    .highlight-name {
-      color: var(--accent);
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
-      gap: 20px;
-      margin-top: 24px;
-    }
-
-    .card-section {
-      background: rgba(15,23,42,0.92);
-      border-radius: 18px;
-      padding: 16px 16px 14px;
-      border: 1px solid rgba(55,65,81,0.9);
-    }
-
-    .section-title {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .message {
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .message strong {
-      color: #fbbf24;
-    }
-
-    .signature {
-      margin-top: 10px;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .divider {
-      height: 1px;
-      background: linear-gradient(to right, transparent, #4b5563, transparent);
-      margin: 12px 0 10px;
-    }
-
-    .countdown-box {
-      background: var(--accent-soft);
-      border-radius: 14px;
-      padding: 12px 12px 10px;
-      border: 1px solid rgba(248, 250, 252, 0.09);
-    }
-
-    .countdown-label {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-
-    .countdown-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 6px;
-    }
-
-    .countdown-item {
-      background: rgba(15,23,42,0.95);
-      border-radius: 12px;
-      padding: 6px 4px 5px;
-      text-align: center;
-      border: 1px solid rgba(55,65,81,0.95);
-    }
-
-    .count-number {
-      font-size: 16px;
-      font-weight: 700;
-    }
-
-    .count-label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-muted);
-    }
-
-    .countdown-note {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 6px;
-    }
-
-    /* GALLERY */
-    .gallery-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .gallery-item {
-      position: relative;
-      width: calc(33.333% - 6px);
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid rgba(55,65,81,0.9);
-      height: 80px;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .gallery-caption {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 6px;
-    }
-
-    /* POLL / SONDAGGIO */
-    .poll-box {
-      background: rgba(15,23,42,0.9);
-      border-radius: 14px;
-      padding: 10px 10px 8px;
-      border: 1px dashed rgba(107,114,128,0.9);
-    }
-
-    .poll-title {
-      font-size: 13px;
-      margin-bottom: 4px;
-    }
-
-    .poll-hint {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .poll-iframe {
-      width: 100%;
-      border: none;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #020617;
-    }
-
-    .footer-note {
-      margin-top: 18px;
-      font-size: 12px;
-      color: var(--text-muted);
-      text-align: center;
-    }
-
-    @media (max-width: 800px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .page {
-        padding: 18px 14px;
-        border-radius: 18px;
-      }
-      .header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .grad-photo {
-        width: 130px;
-        height: 130px;
-      }
-      .title {
-        font-size: 22px;
-      }
-      .gallery-item {
-        width: calc(50% - 6px);
-      }
-    }
-  </style>
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
 </head>
 <body>
-  <div class="page">
-    <div class="header">
-      <!-- FOTO PRINCIPALE LAUREATO/A -->
-      <div class="grad-photo">
-        <img src="https://via.placeholder.com/400x400.png?text=FOTO+LAUREA" alt="Foto laurea">
-      </div>
 
-      <div class="header-text">
-        <div class="chip">
-          <span class="chip-dot"></span>
-          <span>Laurea Magistrale · Giornata da ricordare</span>
-        </div>
-        <div class="title">
-          Congratulazioni <span class="highlight-name">[NOME DEL/LA LAUREATO/A]</span> 🎓
-        </div>
-        <div class="subtitle">
-          Dopo anni di impegno, notti insonni e una dose infinita di determinazione, hai conquistato la tua Laurea Magistrale.
-          Questo biglietto raccoglie un po' di felicità, ricordi e messaggi per te.
-        </div>
-      </div>
+    <audio id="bgMusic" src="canzone.mp3" loop></audio>
+
+    <div id="s1" class="screen active">
+        <img src="https://drive.google.com/file/d/1U2AEglKUFeZ3_6o85KStn7R_wY0jzzgV/view?usp=share_link" alt="Foto 1">
+        <h1>Un altro grande traguardo raggiunto, e io non potrei essere più orgoglioso di te. </h1>
+        <p>…dato che la fatica non è stata poca, direi che ti sei meritata un bel regalino.</p>
+        <button onclick="startApp('s2')">➡️ Scopri di più</button>
     </div>
 
-    <div class="layout">
-      <!-- LATO SINISTRO: MESSAGGIO + GALLERY -->
-      <div class="card-section">
-        <div class="section-title">Messaggio di auguri</div>
-        <div class="message">
-          Caro/a <strong>[NOME]</strong>,<br><br>
-          oggi festeggiamo non solo un titolo, ma il percorso che ti ha portato fin qui:
-          la costanza, i sacrifici, le scelte difficili e il coraggio di credere nei tuoi sogni.
-          <br><br>
-          Che questa laurea sia solo l’inizio di nuove sfide, opportunità e soddisfazioni
-          ancora più grandi. Continua a brillare così: con la tua testa, il tuo cuore
-          e quel mix di determinazione e ironia che ti rende unico/a.
-          <br><br>
-          Siamo orgogliosi di te, ieri, oggi e per tutto quello che verrà. 🧡
-        </div>
-        <div class="signature">
-          Con affetto,<br>
-          [Firma / Chi manda il biglietto]
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="section-title">Ricordi in foto</div>
-        <div class="gallery-grid">
-          <!-- Sostituisci gli src con i tuoi link immagine -->
-          <div class="gallery-item">
-            <img src="https://via.placeholder.com/400x300.png?text=Ricordo+1" alt="Ricordo 1">
-          </div>
-          <div class="gallery-item">
-            <img src="https://via.placeholder.com/400x300.png?text=Ricordo+2" alt="Ricordo 2">
-          </div>
-          <div class="gallery-item">
-            <img src="https://via.placeholder.com/400x300.png?text=Ricordo+3" alt="Ricordo 3">
-          </div>
-        </div>
-        <div class="gallery-caption">
-          Sostituisci queste immagini con i momenti più belli: esami, viaggi, biblioteche, spritz post-sessione e la giornata della laurea.
-        </div>
-      </div>
-
-      <!-- LATO DESTRO: COUNTDOWN + SONDAGGIO -->
-      <div class="card-section">
-        <div class="section-title">Countdown alla festa</div>
-        <div class="countdown-box">
-          <div class="countdown-label">Manca a:</div>
-          <div class="countdown-grid">
-            <div class="countdown-item">
-              <div class="count-number" id="days">0</div>
-              <div class="count-label">Giorni</div>
-            </div>
-            <div class="countdown-item">
-              <div class="count-number" id="hours">0</div>
-              <div class="count-label">Ore</div>
-            </div>
-            <div class="countdown-item">
-              <div class="count-number" id="minutes">0</div>
-              <div class="count-label">Minuti</div>
-            </div>
-            <div class="countdown-item">
-              <div class="count-number" id="seconds">0</div>
-              <div class="count-label">Secondi</div>
-            </div>
-          </div>
-          <div class="countdown-note" id="countdown-note">
-            Stiamo contando i secondi fino alla festa di laurea! 🎉
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="section-title">Partecipa al sondaggio</div>
-        <div class="poll-box">
-          <div class="poll-title">Come festeggeremo al meglio questa laurea?</div>
-          <div class="poll-hint">
-            Rispondi al mini-sondaggio qui sotto: le tue idee renderanno la festa ancora più bella.
-          </div>
-          <!-- INCOLLA QUI IL CODICE EMBED DEL TUO GOOGLE FORM -->
-          <!-- Esempio di struttura iframe: sostituisci src con il tuo -->
-          <iframe
-            class="poll-iframe"
-            src="https://docs.google.com/forms/d/e/FORM-ID/viewform?embedded=true"
-            height="320"
-          >
-            Caricamento sondaggio…
-          </iframe>
-        </div>
-      </div>
+    <div id="s2" class="screen">
+        <img src="https://drive.google.com/file/d/1Utf-FmXER2S5W2SzP_uhyqhznCx5fVZU/view?usp=share_link" alt="Foto 2">
+        <p> È un regalo che sogno di farti dal primo giorno in cui ti ho conosciuta.<br> Potrà sembrare banale.<br> Ma spero che ti farà venire lo stesso sorriso che hai nella foto.</p>
+        <button onclick="next('s3')">➡️ Continua</button>
     </div>
 
-    <div class="footer-note">
-      Questo biglietto è digitale: puoi condividerlo, salvarlo tra i preferiti e tornarci ogni volta che vorrai rivivere questa giornata. 🎓✨
+    <div id="s3" class="screen">
+        <img src="https://drive.google.com/file/d/1Utf-FmXER2S5W2SzP_uhyqhznCx5fVZU/view?usp=share_link" alt="Foto 3">
+        <h1>Secondo te di che cosa si tratta?</h1>
+        <input type="text" id="guess" placeholder="Scrivi la tua idea...">
+        <button id="btnInvia" onclick="showHint()">Invia</button>
+        
+        <div id="hintContainer" style="display:none;">
+            <p id="hintMsg" style="font-weight: bold; color: var(--primary);">Ci sei quasi 😉</p>
+            <button id="btnNext3" onclick="next('s4')">➡️ Continua</button>
+        </div>
     </div>
-  </div>
 
-  <script>
-    // COUNTDOWN: imposta qui data e ora della festa di laurea
-    // FORMATO: "Mmm DD, YYYY HH:MM:SS"
-    // Esempio: "Mar 15, 2026 20:30:00"
-    var countDownDate = new Date("Mar 15, 2026 20:30:00").getTime();
+    <div id="s4" class="screen">
+        <img src="https://drive.google.com/file/d/1Utf-FmXER2S5W2SzP_uhyqhznCx5fVZU/view?usp=share_link" alt="Foto 4">
+        <p>Per il regalo dovremo purtroppo attendere... Come tutti i regali che ti faccio d'altronde, a parte quando si tratta di giacche bellissime </p>
+        <h1>Hai capito di cosa si tratta....</h1>
+        <button onclick="next('s5')">➡️ Ho capito… forse</button>
+    </div>
 
-    var x = setInterval(function() {
-      var now = new Date().getTime();
-      var distance = countDownDate - now;
+    <div id="s5" class="screen">
+        <img src="https://drive.google.com/file/d/1Utf-FmXER2S5W2SzP_uhyqhznCx5fVZU/view?usp=share_link" alt="Foto 6">
+        <h1>ebbene sì, anche questa volta sono andato sul sicuro e ho puntato su una delle cose che ami di più al mondo</h1>
+        <p></p>
+        <button onclick="next('s6')">➡️ Curiosa vero</button>
+    </div>
 
-      if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("days").innerHTML = "0";
-        document.getElementById("hours").innerHTML = "0";
-        document.getElementById("minutes").innerHTML = "0";
-        document.getElementById("seconds").innerHTML = "0";
-        document.getElementById("countdown-note").innerHTML =
-          "La festa è iniziata! Goditi ogni momento 🎉";
-        return;
-      }
+    <div id="s6" class="screen">
+        <p>....un altro pezzettino di mondo da scoprrire insieme </p>
+        <img src="https://drive.google.com/file/d/1Utf-FmXER2S5W2SzP_uhyqhznCx5fVZU/view?usp=share_link" alt="Mistero">
+        <h1 style="font-size: 2rem;">✈️ Dove andiamo?</h1>
+        <button onclick="next('s7')">➡️ Dimmi tutto!</button>
+    </div>
 
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    <div id="s7" class="screen">
+        <img src="https://drive.google.com/file/d/1Utf-FmXER2S5W2SzP_uhyqhznCx5fVZU/view?usp=share_link" alt="Dembele">
+        <h1>Secondo te dove siamo diretti…</h1>
+        <button class="quiz-btn" onclick="next('sFinal')">Copenaghen</button>
+        <button class="quiz-btn" onclick="next('sFinal')">Madrid</button>
+        <button class="quiz-btn" onclick="next('sFinal')">Parigi</button>
+        <button class="quiz-btn" onclick="revealCorrect()">Valencia</button>
+    </div>
 
-      document.getElementById("days").innerHTML = days;
-      document.getElementById("hours").innerHTML = hours;
-      document.getElementById("minutes").innerHTML = minutes;
-      document.getElementById("seconds").innerHTML = seconds;
-    }, 1000);
-  </script>
+    <div id="sFinal" class="screen" style="background: white;">
+        <img src="https://drive.google.com/file/d/18IzhNd37asN9vMWESjfJ3Z-lMXCEbq_b/view?usp=share_link" alt="Foto Sorpresa Finale"> <h1 style="color: var(--beach); font-size: 2.2rem;">✈️ Parigi!</h1>
+        <p><strong>25 Settembre – 27 Settembre </strong></p>
+        <div id="countdown"> Caricamento countdown... </div>
+        <p style="font-style: italic; margin-top: 20px;">“Un piccolo pensiero per dimostrarti tutto il mio oroglio ❤️”</p>
+    </div>
+
+    <script>
+        const music = document.getElementById('bgMusic');
+        
+        function startApp(id) {
+            music.play().catch(e => console.log("L'audio partirà dopo l'interazione"));
+            next(id);
+        }
+
+        function next(id) {
+            document.querySelectorAll('.screen').forEach(s => {
+                s.classList.remove('active');
+            });
+            const nextScreen = document.getElementById(id);
+            nextScreen.classList.add('active');
+            
+            window.scrollTo(0, 0);
+
+            if(id === 'sFinal') startCountdown();
+        }
+
+        function showHint() {
+            document.getElementById('btnInvia').style.display = 'none';
+            document.getElementById('hintContainer').style.display = 'block';
+        }
+
+        function revealCorrect() {
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            setTimeout(() => { next('sFinal'); }, 500);
+        }
+
+        function startCountdown() {
+            const target = new Date("Sept 25, 2026 08:00:00").getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const diff = target - now;
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("countdown").innerHTML = "Mancano: " + days + "g " + hours + "o";
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
